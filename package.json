@@ -1,0 +1,19 @@
+{
+  "name": "script-autos",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "bluebird": "^3.7.2",
+    "console-table-printer": "^2.9.0",
+    "lodash": "^4.17.21",
+    "numeral": "^2.0.6",
+    "terminal-link": "^3.0.0"
+  }
+}
