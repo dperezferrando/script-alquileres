@@ -14,6 +14,7 @@ catch(e){
 	lastResults = []
 }
 
+console.log("BUSANDO EN MELI.....................")
 
 const table = new Table({
  columns: [{ name: "title", alignment: "left" }, { name: "m2" }, { name: "rooms" }, { name: "expensas" }, { name: "price" }, { name: "total"}, { name: "location", alignment: "left" }, { name: "permalink", alignment: "left", maxLen: 10}],
@@ -40,3 +41,4 @@ Promise.map(neighborhoods, neighborhood => axios.get(`https://api.mercadolibre.c
 })
 .then(results => _.orderBy(results, ["rooms", "m2", "total"], ["desc", "desc", "asc"]))
 .tap(results => { table.addRows(results); table.printTable()})
+.tap(() => console.log("FIN TABLA MELI............."))
