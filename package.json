@@ -11,6 +11,7 @@
   "dependencies": {
     "axios": "^0.21.1",
     "bluebird": "^3.7.2",
+    "cheerio": "^1.0.0-rc.10",
     "console-table-printer": "^2.9.0",
     "lodash": "^4.17.21",
     "numeral": "^2.0.6",
