@@ -15,20 +15,22 @@ catch(e){
 	lastResults = []
 }
 
-const falopaToNumber = falopa => parseInt(_.filter(falopa, it => _.isFinite(parseInt(it))).join(""))
+console.log("BUSCANDO EN ZONA PROP.................")
+
+const falopaToNumber = falopa => parseInt(_.filter(falopa, it => _.isFinite(parseInt(it))).join("")) || 0
 
 const table = new Table({
  columns: [{ name: "title", alignment: "left" }, { name: "m2" }, { name: "rooms" }, { name: "expensas" }, { name: "price" }, { name: "total"}, { name: "location", alignment: "left" }, { name: "permalink", alignment: "left", maxLen: 10}],
  sort: (r1, r2) => r2.rooms - r1.rooms || r1.total - r2.total || r2.m2 - r1.m2
 });
 
-Promise.map([1,2,3,4], page => fs.readFileAsync(`./zonapro${page}.html`))
+Promise.map([1,2,3,4], page => fs.readFileAsync(`./htmls/zonapro${page}.html`))
 .map(data => cheerio.load(data))
 .map($ => {
 	return { 
 		results: $('.postingCard').get().map(it => {
 			const price = falopaToNumber($(it).find(".firstPrice").text());
-			const expensas = falopaToNumber($(it).find(".postingCardExpenses").text()) || 0;
+			const expensas = falopaToNumber($(it).find(".postingCardExpenses").text());
 			return {
 				price,
 				expensas,
@@ -48,10 +50,13 @@ Promise.map([1,2,3,4], page => fs.readFileAsync(`./zonapro${page}.html`))
 .reduce((a,b) => ({ results: a.results.concat(b.results), count: a.count }))
 .tap(({ results, count }) => console.log("Encontre", results.length, "Deberia haber", count))
 .get("results")
-.tap(results => fs.writeFileAsync(FILENAME, `module.exports=${JSON.stringify(results)}`))
-.filter(result => !_.some(lastResults, it => it.permalink == result.permalink))
+.tap(results => { 
+	const newResults = _.uniqBy(lastResults.concat(results), "id");
+	return fs.writeFileAsync(FILENAME, `module.exports=${JSON.stringify(newResults)}`) 
+ })
+.filter(result => !_.some(lastResults, it => it.id == result.id))
 .tap(results => console.log("Solo ", results.length, "son nuevos"))
 .tap(() => console.log("------------------------------------------------------------------------------------------------------------------------------------------"))
 .tap(results => { table.addRows(results); table.printTable()})
-
+.tap(() => console.log("FIN TABLA ZONA PROP............."))
 
