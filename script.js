@@ -21,8 +21,8 @@ const table = new Table({
  sort: (r1, r2) => r2.rooms - r1.rooms || r1.total - r2.total || r2.m2 - r1.m2
 });
 
-// Devoto, Monte Castro, Villa Real
-const neighborhoods = ["TUxBQlZJTDYzNzZa", "TUxBQk1PTjE2OTBa", "TUxBQlZJTDM3Mzda"]
+// Devoto, Monte Castro, Villa Real, Villa Pueyrredon
+const neighborhoods = ["TUxBQlZJTDYzNzZa", "TUxBQk1PTjE2OTBa", "TUxBQlZJTDM3Mzda", "TUxBQlZJTDE2MDBa"]
 
 Promise.map(neighborhoods, neighborhood => axios.get(`https://api.mercadolibre.com/sites/MLA/search?category=MLA1459&state=TUxBUENBUGw3M2E1&neighborhood=${neighborhood}&operation=242073&rooms=[2-3]&since=today`))
 .map(it => it.data.results)

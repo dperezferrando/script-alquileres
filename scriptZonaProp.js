@@ -24,7 +24,7 @@ const table = new Table({
  sort: (r1, r2) => r2.rooms - r1.rooms || r1.total - r2.total || r2.m2 - r1.m2
 });
 
-Promise.map([1,2,3,4], page => fs.readFileAsync(`./htmls/zonapro${page}.html`))
+Promise.map([1,2,3,4,5], page => fs.readFileAsync(`./htmls/zonapro${page}.html`))
 .map(data => cheerio.load(data))
 .map($ => {
 	return { 

@@ -24,7 +24,7 @@ const table = new Table({
  sort: (r1, r2) => r2.rooms - r1.rooms || r1.total - r2.total || r2.m2 - r1.m2
 });
 
-Promise.map([1,2,3], page => fs.readFileAsync(`./htmls/argenprop${page}.html`))
+Promise.map([1,2,3,4], page => fs.readFileAsync(`./htmls/argenprop${page}.html`))
 .map(data => cheerio.load(data))
 .map($ => {
 	return { 
@@ -43,7 +43,7 @@ Promise.map([1,2,3], page => fs.readFileAsync(`./htmls/argenprop${page}.html`))
 				title: _.truncate(_.trim($(it).find(".card__title--primary").text().replace(/\r?\n|\r/g, " ")), { length: 15 })
 			}
 		}),
-		count: parseInt(_.take(_.trim($('.listing-header__subtitle').text()), 2).join(""))
+		count: parseInt(_.take(_.trim($('.listing-header__title').text()), 2).join(""))
 
 	}
 })
