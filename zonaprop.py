@@ -1,6 +1,10 @@
-import cloudscraper
+# import cloudscraper
 
-scraper = cloudscraper.create_scraper()  # returns a CloudScraper instance
+# scraper = cloudscraper.create_scraper()  # returns a CloudScraper instance
+
+import cfscrape
+
+scraper = cfscrape.create_scraper()  # returns a CloudflareScraper instance
 
 print("DESCARGANDO HTMLS DE ZONAPROP....................")
 
