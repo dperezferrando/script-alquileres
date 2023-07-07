@@ -14,7 +14,7 @@ def getPage(page):
 	f.write(scraper.get(f'https://www.zonaprop.com.ar/departamentos-ph-alquiler-monte-castro-villa-devoto-villa-pueyrredon-villa-real-desde-2-hasta-3-ambientes-pagina-{page}.html').text)
 	f.close()
 
-for page in [1,2,3,4,5]:
+for page in [1,2,3,4,5,6,7,8]:
 	getPage(page)
 
 print("PAGINAS DESCARGADAS.............")
