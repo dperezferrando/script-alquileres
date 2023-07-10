@@ -35,7 +35,11 @@ Promise.map([1, 2, 3, 4, 5, 6, 7, 8], page => fs.readFileAsync(`./htmls/argenpro
 					price,
 					expensas,
 					rooms: falopaToNumber($(it).find("li").filter((i, el) => new RegExp(/dorm/, "gi").test($(el).text())).first().text()) + 1,
-					m2: falopaToNumber($(it).find("span").filter((i, el) => new RegExp(/[0-9]+ m/, "gi").test($(el).text())).first().text()),
+					m2: _($(it).find("span"))
+						.map(it => $(it).text()).filter(it => new RegExp(/m²/, "gi").test(it))
+						.map(falopaToNumber)
+						.take(1)
+						.value(),
 					total: price + expensas,
 					location: _.truncate(_.trim($(it).find(".card__address").text().replace(/\r?\n|\r/g, " ")), { length: 20 }),
 					permalink: `https://www.argenprop.com${$(it).find("a").first().attr("href")}`,
