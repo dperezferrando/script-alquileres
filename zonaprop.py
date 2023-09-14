@@ -2,9 +2,9 @@
 
 # scraper = cloudscraper.create_scraper()  # returns a CloudScraper instance
 
-import cfscrape
+import cloudscraper 
 
-scraper = cfscrape.create_scraper()  # returns a CloudflareScraper instance
+scraper = cloudscraper.create_scraper(delay=10, browser="chrome") 
 
 print("DESCARGANDO HTMLS DE ZONAPROP....................")
 
