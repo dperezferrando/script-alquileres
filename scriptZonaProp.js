@@ -28,23 +28,23 @@ Promise.map([1, 2, 3, 4, 5, 6, 7, 8], page => fs.readFileAsync(`./htmls/zonapro$
 	.map(data => cheerio.load(data))
 	.map($ => {
 		return {
-			results: $('.sc-1tt2vbg-3').get().map(it => {
+			results: $('.CardContainer-sc-1tt2vbg-5').get().map(it => {
 				$(it).prev().attr("data-to-posting")
-				const price = falopaToNumber($(it).find(".sc-12dh9kl-4").text());
-				const expensas = falopaToNumber($(it).find(".sc-12dh9kl-2").text());
+				const price = falopaToNumber($(it).find(".Price-sc-12dh9kl-3").text());
+				const expensas = falopaToNumber($(it).find(".Expenses-sc-12dh9kl-1").text());
 				return {
 					price,
 					expensas,
 					rooms: falopaToNumber($(it).find("span").filter((i, el) => new RegExp(/amb/, "gi").test($(el).text())).first().text()),
 					m2: falopaToNumber($(it).find("span").filter((i, el) => new RegExp(/[0-9]+ m/, "gi").test($(el).text())).first().text()),
 					total: price + expensas,
-					location: _.truncate(_.trim($(it).find(".sc-ge2uzh-0").text().replace(/\r?\n|\r/g, " ")), { length: 30 }),
+					location: _.truncate(_.trim($(it).find(".LocationLocation-sc-ge2uzh-2").text().replace(/\r?\n|\r/g, " ")), { length: 30 }),
 					permalink: `https://www.zonaprop.com.ar${$(it).children().attr("data-to-posting")}`,
 					id: $(it).children().attr("data-id"),
-					title: _.truncate(_.trim($(it).find(".sc-i1odl-11").text().replace(/\r?\n|\r/g, " ")), { length: 30 })
+					title: _.truncate(_.trim($(it).find(".PostingDescription-sc-i1odl-11").text().replace(/\r?\n|\r/g, " ")), { length: 20 })
 				}
 			}),
-			count: parseInt(_.get($('.sc-1t7lunp-10').text().split(" "), 1))
+			count: parseInt(_.get($('.Title-sc-1oqs0ed-0').text().split(" "), 0))
 
 		}
 	})
